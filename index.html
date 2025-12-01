@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>汎用SPAプロキシ</title>
+  <style>
+    body { font-family: sans-serif; margin: 1rem; background: #f0f0f0; }
+    input { width: 70%; padding: 0.5rem; font-size: 1rem; }
+    button { padding: 0.5rem 1rem; font-size: 1rem; margin-left: 0.5rem; }
+    #proxyFrame { width: 100%; height: 80vh; border: 1px solid #ccc; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>汎用SPAプロキシ</h1>
+  <p>プロキシしたいURLを入力してください（YouTube/Netflix等は不可）</p>
+  <input type="text" id="urlInput" placeholder="https://example.com">
+  <button id="goBtn">表示</button>
+  <iframe id="proxyFrame"></iframe>
+
+  <script>
+    const input = document.getElementById("urlInput");
+    const btn = document.getElementById("goBtn");
+    const frame = document.getElementById("proxyFrame");
+
+    btn.addEventListener("click", () => {
+      const url = input.value.trim();
+      if (!url) return alert("URLを入力してください");
+      frame.src = "/proxy-page?url=" + encodeURIComponent(url);
+    });
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") btn.click();
+    });
+  </script>
+</body>
+</html>
